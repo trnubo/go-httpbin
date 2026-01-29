@@ -148,6 +148,7 @@ func (h *HTTPBin) Handler() http.Handler {
 	mux.HandleFunc("HEAD /head", h.Get)
 	mux.HandleFunc("PATCH /patch", h.RequestWithBody)
 	mux.HandleFunc("POST /post", h.RequestWithBody)
+	mux.HandleFunc("POST /post/discard", h.RequestWithBodyDiscard)
 	mux.HandleFunc("PUT /put", h.RequestWithBody)
 
 	// Endpoints that accept any methods

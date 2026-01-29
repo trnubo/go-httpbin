@@ -102,6 +102,7 @@
 <li><a href="{{.Prefix}}/links/10"><code>{{.Prefix}}/links/:n</code></a> Returns page containing <em>n</em> HTML links.</li>
 <li><code>{{.Prefix}}/patch</code> Returns request data.  Allows only <code>PATCH</code> requests.</li>
 <li><code>{{.Prefix}}/post</code> Returns request data.  Allows only <code>POST</code> requests.</li>
+<li><code>{{.Prefix}}/post/discard</code> Returns request header dict, stream all bytes into discard.  Allows only <code>POST</code> requests.</li>
 <li><code>{{.Prefix}}/put</code> Returns request data.  Allows only <code>PUT</code> requests.</li>
 <li><a href="{{.Prefix}}/range/:n"><code>{{.Prefix}}/range/1024?duration=s&amp;chunk_size=code</code></a> Streams <em>n</em> bytes, and allows specifying a <em>Range</em> header to select a subset of the data. Accepts a <em>chunk_size</em> and request <em>duration</em> parameter.</li>
 <li><a href="{{.Prefix}}/redirect-to?status_code=307&amp;url=http%3A%2F%2Fexample.com%2F"><code>{{.Prefix}}/redirect-to?url=foo&status_code=307</code></a> 307 Redirects to the <em>foo</em> URL.</li>

@@ -99,6 +99,27 @@ func (h *HTTPBin) RequestWithBody(w http.ResponseWriter, r *http.Request) {
 	writeJSON(http.StatusOK, w, resp)
 }
 
+// RequestWithBodyDiscard handles POST, PUT, and PATCH requests by responding with a
+// JSON representation of the incoming request without body data
+func (h *HTTPBin) RequestWithBodyDiscard(w http.ResponseWriter, r *http.Request) {
+	resp := &bodyResponse{
+		Args:    r.URL.Query(),
+		Headers: getRequestHeaders(r, h.excludeHeadersProcessor),
+		Method:  r.Method,
+		Origin:  getClientIP(r),
+		URL:     getURL(r).String(),
+	}
+
+	n, err := io.Copy(io.Discard, r.Body)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+	resp.Data = fmt.Sprintf("bytes received: %d", n)
+
+	writeJSON(http.StatusOK, w, resp)
+}
+
 // Gzip returns a gzipped response
 func (h *HTTPBin) Gzip(w http.ResponseWriter, r *http.Request) {
 	var (
